@@ -17,6 +17,7 @@ const ChatRoomScreen = ()=>{
          return <ChatMessage message={item}/>
     }}
      />
+     <ChatInput/>
      </ImageBackground>
     );
 }

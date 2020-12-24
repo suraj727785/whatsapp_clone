@@ -9,6 +9,7 @@ import { RootStackParamList } from '../types';
 import MainTabNavigator from './MainTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
+import ContactsScreen from '../screens/ConatctsScreen';
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -91,6 +92,23 @@ function RootNavigator() {
         ),
       })}
       />
+       <Stack.Screen 
+       name="Contacts" 
+       component={ContactsScreen}
+       options={{ title: 'Select Contact',
+       headerRight:() => (
+        <View style={{
+          flexDirection:'row',
+          width:60,
+          justifyContent:'space-between',
+          marginRight:10,
+            }}>
+        <Octicons name="search" size={22} color={'white'}/>
+        <MaterialCommunityIcons name="dots-vertical" size={22} color={'white'}/>
+        </View>
+        ),
+      }} 
+        />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

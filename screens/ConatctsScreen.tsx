@@ -1,24 +1,22 @@
 import * as React from 'react';
 import { StyleSheet,ScrollView } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import ChatListItem from '../components/ChatListItem';
-import NewMessageButton from '../components/NewMessageButton';
+import ContactsListItem from '../components/ContactsListItem';
 import { Text, View } from '../components/Themed';
-import chatRooms from '../dummy-data/ChatRooms';
+import users from '../dummy-data/Users';
 
-export default function ChatScreen() {
+export default function ContactsScreen() {
   return (
     <View style={styles.container}>
      <FlatList
      style={{width:'100%'}}
-      keyExtractor={chatRooms=>chatRooms.id}
-      data={chatRooms}
+      keyExtractor={users=>users.id}
+      data={users}
       renderItem={({item})=>{
-          return <ChatListItem ChatRoom={item} />
+          return <ContactsListItem user={item} />
       }}/>
-     <NewMessageButton />
       </View>
-  );
+  ); 
 }
 
 const styles = StyleSheet.create({
