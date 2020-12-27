@@ -30,9 +30,7 @@ function App() {
         // run this snippet only after first time app is mounted
         useEffect(()=>{
           const fetchUser= async () => {
-        // get Authenicated user from Auth
         const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true});
-        // get the user from backend with sub from auth
         const userData= await API.graphql(
           graphqlOperation(getUser,{id: userInfo.attributes.sub})
         );
