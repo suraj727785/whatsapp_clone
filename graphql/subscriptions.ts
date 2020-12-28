@@ -9,11 +9,11 @@ export const onCreateUser = /* GraphQL */ `
       name
       imageUri
       status
-      chatroomUser {
+      chatRoomUser {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -31,11 +31,11 @@ export const onUpdateUser = /* GraphQL */ `
       name
       imageUri
       status
-      chatroomUser {
+      chatRoomUser {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -53,11 +53,11 @@ export const onDeleteUser = /* GraphQL */ `
       name
       imageUri
       status
-      chatroomUser {
+      chatRoomUser {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -68,18 +68,18 @@ export const onDeleteUser = /* GraphQL */ `
     }
   }
 `;
-export const onCreateChatroomUser = /* GraphQL */ `
-  subscription OnCreateChatroomUser {
-    onCreateChatroomUser {
+export const onCreateChatRoomUser = /* GraphQL */ `
+  subscription OnCreateChatRoomUser {
+    onCreateChatRoomUser {
       id
-      UserID
-      ChatroomID
+      userID
+      chatRoomID
       user {
         id
         name
         imageUri
         status
-        chatroomUser {
+        chatRoomUser {
           nextToken
         }
         createdAt
@@ -87,7 +87,7 @@ export const onCreateChatroomUser = /* GraphQL */ `
       }
       chatRoom {
         id
-        chatroomUsers {
+        chatRoomUsers {
           nextToken
         }
         createdAt
@@ -98,18 +98,18 @@ export const onCreateChatroomUser = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateChatroomUser = /* GraphQL */ `
-  subscription OnUpdateChatroomUser {
-    onUpdateChatroomUser {
+export const onUpdateChatRoomUser = /* GraphQL */ `
+  subscription OnUpdateChatRoomUser {
+    onUpdateChatRoomUser {
       id
-      UserID
-      ChatroomID
+      userID
+      chatRoomID
       user {
         id
         name
         imageUri
         status
-        chatroomUser {
+        chatRoomUser {
           nextToken
         }
         createdAt
@@ -117,7 +117,7 @@ export const onUpdateChatroomUser = /* GraphQL */ `
       }
       chatRoom {
         id
-        chatroomUsers {
+        chatRoomUsers {
           nextToken
         }
         createdAt
@@ -128,18 +128,18 @@ export const onUpdateChatroomUser = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteChatroomUser = /* GraphQL */ `
-  subscription OnDeleteChatroomUser {
-    onDeleteChatroomUser {
+export const onDeleteChatRoomUser = /* GraphQL */ `
+  subscription OnDeleteChatRoomUser {
+    onDeleteChatRoomUser {
       id
-      UserID
-      ChatroomID
+      userID
+      chatRoomID
       user {
         id
         name
         imageUri
         status
-        chatroomUser {
+        chatRoomUser {
           nextToken
         }
         createdAt
@@ -147,7 +147,7 @@ export const onDeleteChatroomUser = /* GraphQL */ `
       }
       chatRoom {
         id
-        chatroomUsers {
+        chatRoomUsers {
           nextToken
         }
         createdAt
@@ -162,11 +162,11 @@ export const onCreateChatRoom = /* GraphQL */ `
   subscription OnCreateChatRoom {
     onCreateChatRoom {
       id
-      chatroomUsers {
+      chatRoomUsers {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -181,11 +181,11 @@ export const onUpdateChatRoom = /* GraphQL */ `
   subscription OnUpdateChatRoom {
     onUpdateChatRoom {
       id
-      chatroomUsers {
+      chatRoomUsers {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -200,11 +200,11 @@ export const onDeleteChatRoom = /* GraphQL */ `
   subscription OnDeleteChatRoom {
     onDeleteChatRoom {
       id
-      chatroomUsers {
+      chatRoomUsers {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }

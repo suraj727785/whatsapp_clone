@@ -9,11 +9,11 @@ export const getUser = /* GraphQL */ `
       name
       imageUri
       status
-      chatroomUser {
+      chatRoomUser {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -36,7 +36,7 @@ export const listUsers = /* GraphQL */ `
         name
         imageUri
         status
-        chatroomUser {
+        chatRoomUser {
           nextToken
         }
         createdAt
@@ -46,18 +46,18 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
-export const getChatroomUser = /* GraphQL */ `
-  query GetChatroomUser($id: ID!) {
-    getChatroomUser(id: $id) {
+export const getChatRoomUser = /* GraphQL */ `
+  query GetChatRoomUser($id: ID!) {
+    getChatRoomUser(id: $id) {
       id
-      UserID
-      ChatroomID
+      userID
+      chatRoomID
       user {
         id
         name
         imageUri
         status
-        chatroomUser {
+        chatRoomUser {
           nextToken
         }
         createdAt
@@ -65,7 +65,7 @@ export const getChatroomUser = /* GraphQL */ `
       }
       chatRoom {
         id
-        chatroomUsers {
+        chatRoomUsers {
           nextToken
         }
         createdAt
@@ -76,17 +76,17 @@ export const getChatroomUser = /* GraphQL */ `
     }
   }
 `;
-export const listChatroomUsers = /* GraphQL */ `
-  query ListChatroomUsers(
-    $filter: ModelChatroomUserFilterInput
+export const listChatRoomUsers = /* GraphQL */ `
+  query ListChatRoomUsers(
+    $filter: ModelChatRoomUserFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listChatroomUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listChatRoomUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        UserID
-        ChatroomID
+        userID
+        chatRoomID
         user {
           id
           name
@@ -111,11 +111,11 @@ export const getChatRoom = /* GraphQL */ `
   query GetChatRoom($id: ID!) {
     getChatRoom(id: $id) {
       id
-      chatroomUsers {
+      chatRoomUsers {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -135,7 +135,7 @@ export const listChatRooms = /* GraphQL */ `
     listChatRooms(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        chatroomUsers {
+        chatRoomUsers {
           nextToken
         }
         createdAt

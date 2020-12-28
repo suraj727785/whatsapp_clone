@@ -12,11 +12,11 @@ export const createUser = /* GraphQL */ `
       name
       imageUri
       status
-      chatroomUser {
+      chatRoomUser {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -37,11 +37,11 @@ export const updateUser = /* GraphQL */ `
       name
       imageUri
       status
-      chatroomUser {
+      chatRoomUser {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -62,11 +62,11 @@ export const deleteUser = /* GraphQL */ `
       name
       imageUri
       status
-      chatroomUser {
+      chatRoomUser {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -77,21 +77,21 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
-export const createChatroomUser = /* GraphQL */ `
-  mutation CreateChatroomUser(
-    $input: CreateChatroomUserInput!
-    $condition: ModelChatroomUserConditionInput
+export const createChatRoomUser = /* GraphQL */ `
+  mutation CreateChatRoomUser(
+    $input: CreateChatRoomUserInput!
+    $condition: ModelChatRoomUserConditionInput
   ) {
-    createChatroomUser(input: $input, condition: $condition) {
+    createChatRoomUser(input: $input, condition: $condition) {
       id
-      UserID
-      ChatroomID
+      userID
+      chatRoomID
       user {
         id
         name
         imageUri
         status
-        chatroomUser {
+        chatRoomUser {
           nextToken
         }
         createdAt
@@ -99,7 +99,7 @@ export const createChatroomUser = /* GraphQL */ `
       }
       chatRoom {
         id
-        chatroomUsers {
+        chatRoomUsers {
           nextToken
         }
         createdAt
@@ -110,21 +110,21 @@ export const createChatroomUser = /* GraphQL */ `
     }
   }
 `;
-export const updateChatroomUser = /* GraphQL */ `
-  mutation UpdateChatroomUser(
-    $input: UpdateChatroomUserInput!
-    $condition: ModelChatroomUserConditionInput
+export const updateChatRoomUser = /* GraphQL */ `
+  mutation UpdateChatRoomUser(
+    $input: UpdateChatRoomUserInput!
+    $condition: ModelChatRoomUserConditionInput
   ) {
-    updateChatroomUser(input: $input, condition: $condition) {
+    updateChatRoomUser(input: $input, condition: $condition) {
       id
-      UserID
-      ChatroomID
+      userID
+      chatRoomID
       user {
         id
         name
         imageUri
         status
-        chatroomUser {
+        chatRoomUser {
           nextToken
         }
         createdAt
@@ -132,7 +132,7 @@ export const updateChatroomUser = /* GraphQL */ `
       }
       chatRoom {
         id
-        chatroomUsers {
+        chatRoomUsers {
           nextToken
         }
         createdAt
@@ -143,21 +143,21 @@ export const updateChatroomUser = /* GraphQL */ `
     }
   }
 `;
-export const deleteChatroomUser = /* GraphQL */ `
-  mutation DeleteChatroomUser(
-    $input: DeleteChatroomUserInput!
-    $condition: ModelChatroomUserConditionInput
+export const deleteChatRoomUser = /* GraphQL */ `
+  mutation DeleteChatRoomUser(
+    $input: DeleteChatRoomUserInput!
+    $condition: ModelChatRoomUserConditionInput
   ) {
-    deleteChatroomUser(input: $input, condition: $condition) {
+    deleteChatRoomUser(input: $input, condition: $condition) {
       id
-      UserID
-      ChatroomID
+      userID
+      chatRoomID
       user {
         id
         name
         imageUri
         status
-        chatroomUser {
+        chatRoomUser {
           nextToken
         }
         createdAt
@@ -165,7 +165,7 @@ export const deleteChatroomUser = /* GraphQL */ `
       }
       chatRoom {
         id
-        chatroomUsers {
+        chatRoomUsers {
           nextToken
         }
         createdAt
@@ -183,11 +183,11 @@ export const createChatRoom = /* GraphQL */ `
   ) {
     createChatRoom(input: $input, condition: $condition) {
       id
-      chatroomUsers {
+      chatRoomUsers {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -205,11 +205,11 @@ export const updateChatRoom = /* GraphQL */ `
   ) {
     updateChatRoom(input: $input, condition: $condition) {
       id
-      chatroomUsers {
+      chatRoomUsers {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }
@@ -227,11 +227,11 @@ export const deleteChatRoom = /* GraphQL */ `
   ) {
     deleteChatRoom(input: $input, condition: $condition) {
       id
-      chatroomUsers {
+      chatRoomUsers {
         items {
           id
-          UserID
-          ChatroomID
+          userID
+          chatRoomID
           createdAt
           updatedAt
         }

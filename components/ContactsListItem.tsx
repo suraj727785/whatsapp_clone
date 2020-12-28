@@ -3,7 +3,7 @@ import {Text,View,StyleSheet, Image,TouchableWithoutFeedback} from 'react-native
 import { User } from '../types';
 import {useNavigation} from '@react-navigation/native';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
-import { createChatRoom, createChatroomUser } from '../graphql/mutations';
+import { createChatRoom, createChatRoomUser } from '../graphql/mutations';
 
 
 export type ContactsListItemProps ={
@@ -30,14 +30,14 @@ const ContactsListItem = (props:ContactsListItemProps) =>{
          console.log("Failed to create new chat room");
          return;
      }
-
+    
      const newChatRoom=newChatRoomData.data.createChatRoom;
     //add user to chatRoom
     await API.graphql(graphqlOperation(
-        createChatroomUser,{
+        createChatRoomUser,{
             input:{
-                UserID:user.id,
-                ChatroomID:newChatRoom.id
+                userID:user.id,
+                chatRoomID:newChatRoom.id
             }
         }
     ));
@@ -46,10 +46,10 @@ const ContactsListItem = (props:ContactsListItemProps) =>{
     //add authenicated user to chatRoom
     const userInfo=await Auth.currentAuthenticatedUser();
     await API.graphql(graphqlOperation(
-        createChatroomUser,{
+        createChatRoomUser,{
             input:{
-                UserID:userInfo.attributes.sub,
-                ChatroomID:newChatRoom.id
+                userID:userInfo.attributes.sub,
+                chatRoomID:newChatRoom.id
             }
         }
     ));

@@ -1,9 +1,9 @@
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Text,View,StyleSheet, Image,TouchableWithoutFeedback} from 'react-native';
 import {ChatRoom } from '../types';
 import {useNavigation} from '@react-navigation/native';
-import Navigation from '../navigation';
+import { Auth } from 'aws-amplify';
 
 export type ChatListItemProps ={
     ChatRoom:ChatRoom,
@@ -11,8 +11,23 @@ export type ChatListItemProps ={
 
 
 const ChatListItem = (props:ChatListItemProps) =>{
+    
     const {ChatRoom}=props;
-    const user=ChatRoom.users[1];
+
+   const [otherUser,setOtherUser]=useState(null);
+
+    useEffect(() =>{
+        const getOtherUser= async ()=>{
+        const userInfo= await Auth.currentAuthenticatedUser();
+        if(ChatRoom.chatRoom.chatRoomUsers.items[0].user.id===userInfo.attributes.sub){
+            setOtherUser(ChatRoom.chatRoom.chatRoomUsers.items[1].user);
+        }else{
+            setOtherUser(ChatRoom.chatRoom.chatRoomUsers.items[0].user);
+        }
+
+        }
+        getOtherUser();
+    },[]);
 
     const navigation =useNavigation();
 
@@ -20,8 +35,8 @@ const ChatListItem = (props:ChatListItemProps) =>{
        navigation.navigate('ChatRoom',
        {
            id:ChatRoom.id,
-           name:user.name,
-           image:user.imageUri,
+           name:otherUser.name,
+           image:otherUser.imageUri,
     })
     };
     
@@ -31,19 +46,27 @@ const ChatListItem = (props:ChatListItemProps) =>{
         const lastMessageDate=moment(ChatRoom.lastMessage.createdAt).format('YYYY-MM-DD');
         return moment(currentDate).diff( lastMessageDate,'month') >= 2;
     }
+
+    if(!otherUser){
+        return null;
+    }
+    
        return (
         <TouchableWithoutFeedback onPress={GoToChatRoomScreen}>
             <View style={styles.container}>
             <View style={styles.leftContainer}>
-                <Image source={{uri:user.imageUri}} style={styles.avatar}/>
+                <Image source={{uri:otherUser.imageUri}} style={styles.avatar}/>
                 <View style={styles.midContainer}>
-                    <Text style={styles.username}>{user.name}</Text>
-                    <Text numberOfLines={2} style={styles.lastMessage}>{ChatRoom.lastMessage.content}</Text>
+                    <Text style={styles.username}>{otherUser.name}</Text>
+                    <Text numberOfLines={2} style={styles.lastMessage}>
+                        {/* {ChatRoom.lastMessage.content} */}
+                        Heyy You Okay!
+                    </Text>
                 </View>
             </View>
             
-             <Text style={styles.time}>
-                { isMonthAgo() ? moment(ChatRoom.lastMessage.createdAt).format('DD-MM-YYYY') : moment(ChatRoom.lastMessage.createdAt).fromNow() }
+             <Text style={styles.time}> 2 hrs ago
+                {/* { isMonthAgo() ? moment(ChatRoom.lastMessage.createdAt).format('DD-MM-YYYY') : moment(ChatRoom.lastMessage.createdAt).fromNow() } */}
                 </Text>
             </View>
         </TouchableWithoutFeedback>
