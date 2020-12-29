@@ -22,7 +22,7 @@ const ContactsListItem = (props:ContactsListItemProps) =>{
     try{
      const newChatRoomData= await API.graphql(graphqlOperation(
          createChatRoom,{ 
-             input:{ }
+             input:{}
         }
      ));
 

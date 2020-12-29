@@ -6,12 +6,13 @@ import { Message } from '../types';
 
 export type ChatMessageprops = {
     message:Message;
+    myId:myId;
 }
 
 const ChatMessage=(props:ChatMessageprops)=>{
-    const {message} = props;
+    const {message,myId} = props;
     const isMyMessage=()=>{
-        return message.user.id === 'u1';
+        return message.user.id === myId;
     }
     return(
      <View style={styles.container}>
