@@ -24,6 +24,15 @@ query GetUser($id: ID!) {
               }
             }
           }
+          lastMessage {
+          id
+          content
+          updatedAt
+          user{
+            id
+            name
+          }
+        }
         }
       }
       nextToken

@@ -9,7 +9,11 @@ import config from './aws-exports';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import {getUser} from './graphql/queries';
 import {createUser} from './graphql/mutations';
+try{
 Amplify.configure(config);
+}catch(e){
+  console.log(e)
+}
 
 const randomImage=[
   'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/1.jpg',
@@ -19,7 +23,7 @@ const randomImage=[
 ]
 
 
-function App() {
+const App=()=> {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
     
@@ -28,6 +32,7 @@ function App() {
         }
 
         // run this snippet only after first time app is mounted
+        try{
         useEffect(()=>{
           const fetchUser= async () => {
         const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true});
@@ -57,6 +62,9 @@ function App() {
           }
           fetchUser();
         },[]);
+      }catch(e){
+        console.log(e);
+      }
 
   if (!isLoadingComplete) {
     return null;

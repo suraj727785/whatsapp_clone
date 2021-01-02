@@ -26,7 +26,6 @@ export default function ChatScreen() {
    // console.log(userData);
     setChatRooms(userData.data.getUser.chatRoomUser.items);
 
-
       }
       catch(e){
         console.log(e);

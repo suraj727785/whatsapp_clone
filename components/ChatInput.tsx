@@ -3,12 +3,13 @@ import { API, Auth, graphqlOperation } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import {Text,View,StyleSheet,TextInput, TouchableOpacityBase, TouchableOpacity} from 'react-native';
 import Colors from '../constants/Colors';
-import { createMessage } from '../graphql/mutations';
+import { createMessage, updateChatRoom } from '../graphql/mutations';
 
 const ChatInput = (props) =>{
     const {chatRoomID} =props;
     const [message,setMessage]=useState('');
     const [myUserId,setMyUserId]=useState(null);
+    try{
 
     useEffect(()=>{
         const fetchUser= async ()=>{
@@ -18,6 +19,9 @@ const ChatInput = (props) =>{
 
         fetchUser();
     },[])
+}catch(e){
+    console.log(e);
+}
 
     const onPress=()=>{
         if(!message){
@@ -29,22 +33,44 @@ const ChatInput = (props) =>{
     const onPressMicrophone=()=>{
         console.warn('Microphone');
     }
-    const onPressSend= async ()=>{
-        try{
-      await API.graphql(graphqlOperation(
-          createMessage,{
-              input:{
-             userID:myUserId,
-             content:message,
-             chatRoomID: chatRoomID
+    
+    const updateChatRoomLastMessage = async (messageId: string) => {
+        try {
+          await API.graphql(
+            graphqlOperation(
+              updateChatRoom, {
+                input: {
+                  id: chatRoomID,
+                  lastMessageID: messageId,
+                }
               }
-          }
-      )
-        );
-        setMessage('');
-        }catch(e){
-            console.log(e);
+            )
+          );
+        } catch (e) {
+          console.log(e);
         }
+      }
+
+
+    const onPressSend= async ()=>{
+        try {
+            const newMessageData = await API.graphql(
+              graphqlOperation(
+                createMessage, {
+                  input: {
+                    content: message,
+                    userID: myUserId,
+                    chatRoomID:chatRoomID,
+                  }
+                }
+              )
+            )
+           await updateChatRoomLastMessage(newMessageData.data.createMessage.id)
+          } catch (e) {
+            console.log(e);
+          }
+      
+          setMessage('');
     }
     return (
        <View style={styles.container}>

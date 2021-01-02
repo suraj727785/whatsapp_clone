@@ -15,6 +15,7 @@ const ChatListItem = (props:ChatListItemProps) =>{
     const {ChatRoom}=props;
 
    const [otherUser,setOtherUser]=useState(null);
+   try{
 
     useEffect(() =>{
         const getOtherUser= async ()=>{
@@ -28,23 +29,33 @@ const ChatListItem = (props:ChatListItemProps) =>{
         }
         getOtherUser();
     },[]);
-
+   }catch(e){
+       console.log(e);
+   }
     const navigation =useNavigation();
 
     const GoToChatRoomScreen =()=>{
        navigation.navigate('ChatRoom',
        {
-           id:ChatRoom.id,
+           id:ChatRoom.chatRoom.id,
            name:otherUser.name,
            image:otherUser.imageUri,
     })
     };
     
-    
     const isMonthAgo=()=>{
         const currentDate=moment().format('YYYY-MM-DD');
-        const lastMessageDate=moment(ChatRoom.lastMessage.createdAt).format('YYYY-MM-DD');
+        const lastMessageDate=moment(ChatRoom.chatRoom.lastMessage.updatedAt).format('YYYY-MM-DD');
         return moment(currentDate).diff( lastMessageDate,'month') >= 2;
+    }
+    
+    const isMyLastMessage= async()=>{
+        try{
+            const userInfo= await Auth.currentAuthenticatedUser();
+        return ChatRoom.chatRoom.lastMessage.user.id===userInfo.attributes.sub
+        }catch(e){
+            console.log(e);
+        }
     }
 
     if(!otherUser){
@@ -59,14 +70,13 @@ const ChatListItem = (props:ChatListItemProps) =>{
                 <View style={styles.midContainer}>
                     <Text style={styles.username}>{otherUser.name}</Text>
                     <Text numberOfLines={2} style={styles.lastMessage}>
-                        {/* {ChatRoom.lastMessage.content} */}
-                        Heyy You Okay!
+                    {ChatRoom.chatRoom.lastMessage.content} 
                     </Text>
                 </View>
             </View>
             
-             <Text style={styles.time}> 2 hrs ago
-                {/* { isMonthAgo() ? moment(ChatRoom.lastMessage.createdAt).format('DD-MM-YYYY') : moment(ChatRoom.lastMessage.createdAt).fromNow() } */}
+             <Text style={styles.time}>
+                { isMonthAgo() ? moment(ChatRoom.chatRoom.lastMessage.updatedAt).format('DD-MM-YYYY') : moment(ChatRoom.chatRoom.lastMessage.updatedAt).fromNow() }
                 </Text>
             </View>
         </TouchableWithoutFeedback>

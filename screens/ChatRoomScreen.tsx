@@ -15,7 +15,7 @@ const ChatRoomScreen = ()=>{
     const [myId,setMyId]=useState(null);
 
     const route= useRoute();
-
+    try{
     useEffect(()=>{
         const fetchMessages=async()=>{
             const messagesData=await API.graphql(
@@ -43,6 +43,9 @@ const ChatRoomScreen = ()=>{
         fetchMyId();   
 
     },[])
+}catch(e){
+    console.log(e)
+}
 
     return(
     <ImageBackground style={{width:'100%', height:'100%'}}source={BG}>
