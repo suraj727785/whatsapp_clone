@@ -42,7 +42,27 @@ const ChatRoomScreen = ()=>{
         
         fetchMyId();   
 
-    },[])
+    },[]);
+
+    useEffect(() => {
+        const subscription = API.graphql(
+          graphqlOperation(onCreateMessage)
+        ).subscribe({
+          next: (data) => {
+            const newMessage = data.value.data.onCreateMessage;
+    
+            if (newMessage.chatRoomID !== route.params.id) {
+              console.log("Message is in another room!")
+              return;
+            }
+          setMessages([...messages,newMessage]);
+          }
+        });
+    
+        return () => subscription.unsubscribe();
+      }, [])
+    
+
 }catch(e){
     console.log(e)
 }
