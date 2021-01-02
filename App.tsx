@@ -9,11 +9,7 @@ import config from './aws-exports';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import {getUser} from './graphql/queries';
 import {createUser} from './graphql/mutations';
-try{
 Amplify.configure(config);
-}catch(e){
-  console.log(e)
-}
 
 const randomImage=[
   'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/1.jpg',

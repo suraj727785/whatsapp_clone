@@ -7,6 +7,7 @@ import ChatInput from '../components/ChatInput';
 import { useRoute } from '@react-navigation/native';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { messagesByChatRoom } from '../graphql/queries';
+import { onCreateMessage } from '../graphql/subscriptions';
 
 
 const ChatRoomScreen = ()=>{
